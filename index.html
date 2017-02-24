@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <title>Ma super Calculatrice</title>
     <link rel="stylesheet" href="./css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -12,91 +13,109 @@
         <table>
             <tr>
                 <td colspan="4">
-                    <input type="text" name="resultat" value=" " id="resultat" onkeypress="resulatado" />
+                    <input type="text" name="resultat" value=" " id="resultat"/>
 
                 </td>
             </tr>
             <tr>
                 <td colspan="4">
-                    <input type="text" name="valores" value=" " id="valores" onkeypress="return afficher()" />
+                    <input type="text" name="valores" value=" " id="valores"/>
 
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    <input type="button" name="" value="1" id="1" onclick="afficher(value)" />
+                    <input type="button" name="" value="1" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="2" id="2" onclick="afficher(value)" />
+                    <input type="button" name="" value="2" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="3" id="3" onclick="afficher(value)" />
+                    <input type="button" name="" value="3" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="+" id="additionner" onclick="afficher(value)" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="button" name="" value="4" id="4" onclick="afficher(value)" />
-                </td>
-                <td>
-                    <input type="button" name="" value="5" id="5" onclick="afficher(value)" />
-                </td>
-                <td>
-                    <input type="button" name="" value="6" id="6" onclick="afficher(value)" />
-                </td>
-                <td>
-                    <input type="button" name="" value="-" id="soustraire" onclick="afficher(value)" />
+                    <input type="button" name="" value="+" class="num" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="button" name="" value="7" id="7" onclick="afficher(value)" />
+                    <input type="button" name="" value="4" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="8" id="8" onclick="afficher(value)" />
+                    <input type="button" name="" value="5" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="9" id="9" onclick="afficher(value)" />
+                    <input type="button" name="" value="6" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="*" id="multiplier" onclick="afficher(value)" />
+                    <input type="button" name="" value="-" class="num" />
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="button" name="" value="0" id="0" onclick="afficher(value)" />
+                    <input type="button" name="" value="7" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="=" id="egal" onclick="calcular()" />
+                    <input type="button" name="" value="8" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="C" id="suppr" onclick="eliminar()" />
+                    <input type="button" name="" value="9" class="num" />
                 </td>
                 <td>
-                    <input type="button" name="" value="/" id="diviser" onclick="afficher(value)" />
+                    <input type="button" name="" value="*" class="num" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="button" name="" value="0" class="num" />
+                </td>
+                <td>
+                    <input type="button" name="" value="=" id="calcular" />
+                </td>
+                <td>
+                    <input type="button" name="" value="C" id="suppr"/>
+                </td>
+                <td>
+                    <input type="button" name="" value="/" class="num" />
                 </td>
             </tr>
         </table>
     </form>
 </body>
 <script type="text/javascript">
-    function afficher(num) {
-        var operando = document.calculatrice.valores.value;
-        document.getElementById("valores").value = operando + num;
-    }
+var operation = "";
+var resultado = "";
+    $(document).ready(function() {
+        $('.num').click(function() {
 
-    function calcular() {
-        var resultado = eval(document.calculatrice.valores.value);
-        document.calculatrice.resultat.value = resultado;
-    }
+            var valeur = $(this).val();
+            operation += valeur
+            $('#valores').val(operation);
+        });
+        // function afficher(num) {
+        //     var operando = document.calculatrice.valores.value;
+        //     document.getElementById("valores").value = operando + num;
+        // }
+        $('#calcular').click(function() {
+             resultado = eval($('#valores').val());
+             $("#resultat").val($('#valores').val()+ "=" + resultado)
 
-    function eliminar() {
-        document.calculatrice.valores.value = "";
-        document.calculatrice.resultat.value = "";
-    }
+        });
+        // function calcular() {
+        //     var resultado = eval(document.calculatrice.valores.value);
+        //     document.calculatrice.resultat.value = resultado;
+        // }
+        //
+        $('#suppr').click(function() {
+            $("#valores").val("");
+            $("#resultat").val("");
+        });
+                // function eliminar() {
+        //     document.calculatrice.valores.value = "";
+        //     document.calculatrice.resultat.value = "";
+        // }
+    });
 </script>
 
 </html>
